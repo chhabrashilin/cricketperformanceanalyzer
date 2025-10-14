@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Performance Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏏 Cricket Performance Analyzer</h1>
+            <p>Click on the field to mark where you got out, then click the dot to add details</p>
+        </header>
+
+        <div class="main-content">
+            <div class="field-container">
+                <svg id="cricketField" viewBox="0 0 1200 800" class="cricket-field">
+                    <!-- Cricket field boundary (oval - wider than tall) -->
+                    <ellipse cx="600" cy="400" rx="550" ry="350" fill="#228B22" stroke="#006400" stroke-width="3"/>
+                    
+                    <!-- Field markings -->
+                    <ellipse cx="600" cy="400" rx="150" ry="100" fill="none" stroke="#006400" stroke-width="2" stroke-dasharray="5,5"/>
+                    <ellipse cx="600" cy="400" rx="280" ry="180" fill="none" stroke="#006400" stroke-width="2" stroke-dasharray="5,5"/>
+                    <ellipse cx="600" cy="400" rx="420" ry="270" fill="none" stroke="#006400" stroke-width="2" stroke-dasharray="5,5"/>
+                    
+                    <!-- Pitch (22 yards long, running vertically in center) -->
+                    <rect x="590" y="250" width="20" height="300" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+                    
+                    <!-- Wickets (3 stumps each end) -->
+                    <!-- Striker's end (top) -->
+                    <line x1="595" y1="250" x2="595" y2="265" stroke="#8B4513" stroke-width="3"/>
+                    <line x1="600" y1="250" x2="600" y2="265" stroke="#8B4513" stroke-width="3"/>
+                    <line x1="605" y1="250" x2="605" y2="265" stroke="#8B4513" stroke-width="3"/>
+                    
+                    <!-- Non-striker's end (bottom) -->
+                    <line x1="595" y1="535" x2="595" y2="550" stroke="#8B4513" stroke-width="3"/>
+                    <line x1="600" y1="535" x2="600" y2="550" stroke="#8B4513" stroke-width="3"/>
+                    <line x1="605" y1="535" x2="605" y2="550" stroke="#8B4513" stroke-width="3"/>
+                    
+                    <!-- Bails -->
+                    <rect x="594" y="248" width="12" height="2" fill="#FFD700"/>
+                    <rect x="594" y="533" width="12" height="2" fill="#FFD700"/>
+                    
+                    <!-- Crease lines -->
+                    <line x1="580" y1="270" x2="620" y2="270" stroke="#FFFFFF" stroke-width="2"/>
+                    <line x1="580" y1="530" x2="620" y2="530" stroke="#FFFFFF" stroke-width="2"/>
+                    <line x1="580" y1="270" x2="580" y2="530" stroke="#FFFFFF" stroke-width="2"/>
+                    <line x1="620" y1="270" x2="620" y2="530" stroke="#FFFFFF" stroke-width="2"/>
+                    
+                    <!-- Popping crease -->
+                    <line x1="580" y1="250" x2="620" y2="250" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="3,3"/>
+                    <line x1="580" y1="550" x2="620" y2="550" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="3,3"/>
+                    
+                    <!-- Return crease -->
+                    <line x1="580" y1="250" x2="580" y2="270" stroke="#FFFFFF" stroke-width="1"/>
+                    <line x1="620" y1="250" x2="620" y2="270" stroke="#FFFFFF" stroke-width="1"/>
+                    <line x1="580" y1="530" x2="580" y2="550" stroke="#FFFFFF" stroke-width="1"/>
+                    <line x1="620" y1="530" x2="620" y2="550" stroke="#FFFFFF" stroke-width="1"/>
+                    
+                    <!-- Wicket Keeper and Bowler -->
+                    <circle cx="600" cy="230" r="4" fill="#00FF00"/>
+                    <text x="600" y="220" text-anchor="middle" class="field-label">W</text>
+                    
+                    <circle cx="600" cy="570" r="4" fill="#00FF00"/>
+                    <text x="600" y="580" text-anchor="middle" class="field-label">B</text>
+                    
+                    <!-- OFF SIDE (Right side from batsman's perspective looking down the pitch) -->
+                    <!-- Slip cordon (close to wicketkeeper) -->
+                    <circle cx="620" cy="280" r="4" fill="#FF0000"/>
+                    <text x="620" y="270" text-anchor="middle" class="field-label">1S</text>
+                    
+                    <circle cx="640" cy="290" r="4" fill="#FF0000"/>
+                    <text x="640" y="280" text-anchor="middle" class="field-label">2S</text>
+                    
+                    <circle cx="660" cy="300" r="4" fill="#FF0000"/>
+                    <text x="660" y="290" text-anchor="middle" class="field-label">3S</text>
+                    
+                    <!-- Gully -->
+                    <circle cx="680" cy="320" r="4" fill="#FF0000"/>
+                    <text x="680" y="310" text-anchor="middle" class="field-label">G</text>
+                    
+                    <!-- Point (square on off side) -->
+                    <circle cx="750" cy="400" r="4" fill="#FFA500"/>
+                    <text x="750" y="390" text-anchor="middle" class="field-label">P</text>
+                    
+                    <!-- Cover -->
+                    <circle cx="720" cy="350" r="4" fill="#FFA500"/>
+                    <text x="720" y="340" text-anchor="middle" class="field-label">C</text>
+                    
+                    <circle cx="720" cy="450" r="4" fill="#FFA500"/>
+                    <text x="720" y="440" text-anchor="middle" class="field-label">C</text>
+                    
+                    <!-- Extra Cover -->
+                    <circle cx="680" cy="380" r="4" fill="#FFA500"/>
+                    <text x="680" y="370" text-anchor="middle" class="field-label">E</text>
+                    
+                    <!-- Mid Off -->
+                    <circle cx="650" cy="400" r="4" fill="#FFA500"/>
+                    <text x="650" y="390" text-anchor="middle" class="field-label">MO</text>
+                    
+                    <!-- Third Man (deep on off side) -->
+                    <circle cx="850" cy="300" r="4" fill="#0000FF"/>
+                    <text x="850" y="290" text-anchor="middle" class="field-label">TM</text>
+                    
+                    <circle cx="900" cy="350" r="4" fill="#0000FF"/>
+                    <text x="900" y="340" text-anchor="middle" class="field-label">TM</text>
+                    
+                    <!-- Deep Cover -->
+                    <circle cx="850" cy="400" r="4" fill="#0000FF"/>
+                    <text x="850" y="390" text-anchor="middle" class="field-label">DC</text>
+                    
+                    <!-- Long Off -->
+                    <circle cx="750" cy="300" r="4" fill="#0000FF"/>
+                    <text x="750" y="290" text-anchor="middle" class="field-label">LO</text>
+                    
+                    <!-- LEG SIDE (Left side from batsman's perspective) -->
+                    <!-- Mid On -->
+                    <circle cx="550" cy="400" r="4" fill="#FFA500"/>
+                    <text x="550" y="390" text-anchor="middle" class="field-label">MI</text>
+                    
+                    <!-- Mid Wicket -->
+                    <circle cx="520" cy="380" r="4" fill="#FFA500"/>
+                    <text x="520" y="370" text-anchor="middle" class="field-label">MW</text>
+                    
+                    <circle cx="520" cy="420" r="4" fill="#FFA500"/>
+                    <text x="520" y="410" text-anchor="middle" class="field-label">MW</text>
+                    
+                    <!-- Square Leg -->
+                    <circle cx="450" cy="400" r="4" fill="#FFA500"/>
+                    <text x="450" y="390" text-anchor="middle" class="field-label">SL</text>
+                    
+                    <!-- Fine Leg -->
+                    <circle cx="350" cy="450" r="4" fill="#800080"/>
+                    <text x="350" y="440" text-anchor="middle" class="field-label">FL</text>
+                    
+                    <!-- Deep Square Leg -->
+                    <circle cx="300" cy="400" r="4" fill="#0000FF"/>
+                    <text x="300" y="390" text-anchor="middle" class="field-label">DSL</text>
+                    
+                    <!-- Deep Mid Wicket -->
+                    <circle cx="400" cy="350" r="4" fill="#0000FF"/>
+                    <text x="400" y="340" text-anchor="middle" class="field-label">DMW</text>
+                    
+                    <circle cx="400" cy="450" r="4" fill="#0000FF"/>
+                    <text x="400" y="440" text-anchor="middle" class="field-label">DMW</text>
+                    
+                    <!-- Long On -->
+                    <circle cx="450" cy="300" r="4" fill="#0000FF"/>
+                    <text x="450" y="290" text-anchor="middle" class="field-label">LI</text>
+                    
+                    <!-- Long Leg -->
+                    <circle cx="250" cy="450" r="4" fill="#0000FF"/>
+                    <text x="250" y="440" text-anchor="middle" class="field-label">LL</text>
+                    
+                    <!-- Position legend -->
+                    <g transform="translate(50, 50)">
+                        <rect x="0" y="0" width="180" height="140" fill="rgba(255,255,255,0.95)" stroke="#000" stroke-width="1" rx="5"/>
+                        <text x="10" y="20" class="legend-title">Field Positions</text>
+                        <circle cx="15" cy="35" r="3" fill="#FF0000"/>
+                        <text x="25" y="40" class="legend-text">Slips & Close</text>
+                        <circle cx="15" cy="55" r="3" fill="#FFA500"/>
+                        <text x="25" y="60" class="legend-text">Inner ring</text>
+                        <circle cx="15" cy="75" r="3" fill="#0000FF"/>
+                        <text x="25" y="80" class="legend-text">Deep field</text>
+                        <circle cx="15" cy="95" r="3" fill="#800080"/>
+                        <text x="25" y="100" class="legend-text">Fine positions</text>
+                        <circle cx="15" cy="115" r="3" fill="#00FF00"/>
+                        <text x="25" y="120" class="legend-text">Wicket Keeper/Bowler</text>
+                    </g>
+                    
+                    <!-- Position abbreviations legend -->
+                    <g transform="translate(50, 220)">
+                        <rect x="0" y="0" width="200" height="320" fill="rgba(255,255,255,0.95)" stroke="#000" stroke-width="1" rx="5"/>
+                        <text x="10" y="20" class="legend-title">Position Abbreviations</text>
+                        <text x="10" y="40" class="legend-text">1S,2S,3S - 1st,2nd,3rd Slip</text>
+                        <text x="10" y="55" class="legend-text">G - Gully</text>
+                        <text x="10" y="70" class="legend-text">P - Point</text>
+                        <text x="10" y="85" class="legend-text">C - Cover</text>
+                        <text x="10" y="100" class="legend-text">E - Extra Cover</text>
+                        <text x="10" y="115" class="legend-text">MO - Mid Off</text>
+                        <text x="10" y="130" class="legend-text">TM - Third Man</text>
+                        <text x="10" y="145" class="legend-text">DC - Deep Cover</text>
+                        <text x="10" y="160" class="legend-text">LO - Long Off</text>
+                        <text x="10" y="175" class="legend-text">MI - Mid On</text>
+                        <text x="10" y="190" class="legend-text">MW - Mid Wicket</text>
+                        <text x="10" y="205" class="legend-text">SL - Square Leg</text>
+                        <text x="10" y="220" class="legend-text">FL - Fine Leg</text>
+                        <text x="10" y="235" class="legend-text">DSL - Deep Square Leg</text>
+                        <text x="10" y="250" class="legend-text">DMW - Deep Mid Wicket</text>
+                        <text x="10" y="265" class="legend-text">LI - Long On</text>
+                        <text x="10" y="280" class="legend-text">LL - Long Leg</text>
+                        <text x="10" y="295" class="legend-text">W - Wicket Keeper</text>
+                        <text x="10" y="310" class="legend-text">B - Bowler</text>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="controls">
+                <div class="dismissal-form" id="dismissalForm" style="display: none;">
+                    <h3>Dismissal Details</h3>
+                    <form id="detailsForm">
+                        <div class="form-group">
+                            <label for="dismissalType">How were you dismissed?</label>
+                            <select id="dismissalType" required>
+                                <option value="">Select dismissal type</option>
+                                <option value="bowled">Bowled</option>
+                                <option value="caught">Caught</option>
+                                <option value="lbw">LBW</option>
+                                <option value="runout">Run Out</option>
+                                <option value="stumped">Stumped</option>
+                                <option value="hitwicket">Hit Wicket</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bowler">Bowler/Fielder (if applicable)</label>
+                            <input type="text" id="bowler" placeholder="e.g., Smith, or 'Fielding team'">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="runs">Runs scored before dismissal</label>
+                            <input type="number" id="runs" min="0" value="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="balls">Balls faced</label>
+                            <input type="number" id="balls" min="1" value="1">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes">Additional notes</label>
+                            <textarea id="notes" placeholder="Any additional details about the dismissal..."></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Save Dismissal</button>
+                            <button type="button" id="cancelBtn" class="btn-secondary">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="stats-panel">
+                    <h3>Dismissal Statistics</h3>
+                    <div id="statsContent">
+                        <p>Click on the field to add your first dismissal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for viewing dismissal details -->
+        <div id="detailModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>Dismissal Details</h3>
+                <div id="modalContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
