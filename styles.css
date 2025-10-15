@@ -67,6 +67,11 @@ header p {
     background: #f8f9fa;
 }
 
+.clickable-area {
+    cursor: crosshair;
+    pointer-events: all;
+}
+
 .field-label {
     font-size: 10px;
     fill: #333;

@@ -16,16 +16,14 @@
         <div class="main-content">
             <div class="field-container">
                 <svg id="cricketField" viewBox="0 0 1200 800" class="cricket-field">
-                    <!-- Cricket field boundary (oval - wider than tall) -->
-                    <ellipse cx="600" cy="400" rx="550" ry="350" fill="#228B22" stroke="#006400" stroke-width="3"/>
+                    <!-- Cricket field boundary (circular) -->
+                    <circle cx="600" cy="400" r="380" fill="#90EE90" stroke="#006400" stroke-width="3"/>
                     
-                    <!-- Field markings -->
-                    <ellipse cx="600" cy="400" rx="150" ry="100" fill="none" stroke="#006400" stroke-width="2" stroke-dasharray="5,5"/>
-                    <ellipse cx="600" cy="400" rx="280" ry="180" fill="none" stroke="#006400" stroke-width="2" stroke-dasharray="5,5"/>
-                    <ellipse cx="600" cy="400" rx="420" ry="270" fill="none" stroke="#006400" stroke-width="2" stroke-dasharray="5,5"/>
+                    <!-- Inner field marking -->
+                    <circle cx="600" cy="400" r="200" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="5,5"/>
                     
                     <!-- Pitch (22 yards long, running vertically in center) -->
-                    <rect x="590" y="250" width="20" height="300" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+                    <rect x="590" y="250" width="20" height="300" fill="#D2691E" stroke="#8B4513" stroke-width="2"/>
                     
                     <!-- Wickets (3 stumps each end) -->
                     <!-- Striker's end (top) -->
@@ -58,100 +56,140 @@
                     <line x1="580" y1="530" x2="580" y2="550" stroke="#FFFFFF" stroke-width="1"/>
                     <line x1="620" y1="530" x2="620" y2="550" stroke="#FFFFFF" stroke-width="1"/>
                     
+                    <!-- Batsmen and Umpire -->
+                    <circle cx="600" cy="245" r="5" fill="#FF0000"/>
+                    <text x="600" y="235" text-anchor="middle" class="field-label">Striker</text>
+                    
+                    <circle cx="600" cy="555" r="5" fill="#FF0000"/>
+                    <text x="600" y="565" text-anchor="middle" class="field-label">Non-striker</text>
+                    
+                    <circle cx="600" cy="580" r="4" fill="#FFFFFF"/>
+                    <text x="600" y="590" text-anchor="middle" class="field-label">Umpire</text>
+                    
                     <!-- Wicket Keeper and Bowler -->
                     <circle cx="600" cy="230" r="4" fill="#00FF00"/>
-                    <text x="600" y="220" text-anchor="middle" class="field-label">W</text>
+                    <text x="600" y="220" text-anchor="middle" class="field-label">Wicketkeeper</text>
                     
-                    <circle cx="600" cy="570" r="4" fill="#00FF00"/>
-                    <text x="600" y="580" text-anchor="middle" class="field-label">B</text>
+                    <circle cx="600" cy="600" r="4" fill="#00FF00"/>
+                    <text x="600" y="610" text-anchor="middle" class="field-label">Bowler</text>
                     
-                    <!-- OFF SIDE (Right side from batsman's perspective looking down the pitch) -->
-                    <!-- Slip cordon (close to wicketkeeper) -->
-                    <circle cx="620" cy="280" r="4" fill="#FF0000"/>
-                    <text x="620" y="270" text-anchor="middle" class="field-label">1S</text>
+                    <!-- OFF SIDE (Right side from striker's perspective) -->
+                    <!-- Behind the Wicket/Slips -->
+                    <circle cx="620" cy="270" r="4" fill="#FF0000"/>
+                    <text x="620" y="260" text-anchor="middle" class="field-label">1st Slip</text>
                     
-                    <circle cx="640" cy="290" r="4" fill="#FF0000"/>
-                    <text x="640" y="280" text-anchor="middle" class="field-label">2S</text>
+                    <circle cx="640" cy="280" r="4" fill="#FF0000"/>
+                    <text x="640" y="270" text-anchor="middle" class="field-label">2nd Slip</text>
                     
-                    <circle cx="660" cy="300" r="4" fill="#FF0000"/>
-                    <text x="660" y="290" text-anchor="middle" class="field-label">3S</text>
+                    <circle cx="660" cy="290" r="4" fill="#FF0000"/>
+                    <text x="660" y="280" text-anchor="middle" class="field-label">3rd Slip</text>
                     
-                    <!-- Gully -->
-                    <circle cx="680" cy="320" r="4" fill="#FF0000"/>
-                    <text x="680" y="310" text-anchor="middle" class="field-label">G</text>
+                    <circle cx="680" cy="300" r="4" fill="#FF0000"/>
+                    <text x="680" y="290" text-anchor="middle" class="field-label">4th Slip</text>
                     
-                    <!-- Point (square on off side) -->
+                    <!-- Gully and Fly Slip -->
+                    <circle cx="700" cy="320" r="4" fill="#FF0000"/>
+                    <text x="700" y="310" text-anchor="middle" class="field-label">Gully</text>
+                    
+                    <circle cx="720" cy="340" r="4" fill="#FF0000"/>
+                    <text x="720" y="330" text-anchor="middle" class="field-label">Fly Slip</text>
+                    
+                    <!-- Third Man and Long Stop -->
+                    <circle cx="800" cy="250" r="4" fill="#0000FF"/>
+                    <text x="800" y="240" text-anchor="middle" class="field-label">Third Man</text>
+                    
+                    <circle cx="650" cy="200" r="4" fill="#0000FF"/>
+                    <text x="650" y="190" text-anchor="middle" class="field-label">Long Stop</text>
+                    
+                    <!-- Close-in/Inner Ring Off Side -->
+                    <circle cx="620" cy="320" r="4" fill="#FFA500"/>
+                    <text x="620" y="310" text-anchor="middle" class="field-label">Silly Point</text>
+                    
+                    <circle cx="630" cy="340" r="4" fill="#FFA500"/>
+                    <text x="630" y="330" text-anchor="middle" class="field-label">Silly Mid-off</text>
+                    
                     <circle cx="750" cy="400" r="4" fill="#FFA500"/>
-                    <text x="750" y="390" text-anchor="middle" class="field-label">P</text>
+                    <text x="750" y="390" text-anchor="middle" class="field-label">Point</text>
                     
-                    <!-- Cover -->
-                    <circle cx="720" cy="350" r="4" fill="#FFA500"/>
-                    <text x="720" y="340" text-anchor="middle" class="field-label">C</text>
+                    <circle cx="770" cy="420" r="4" fill="#FFA500"/>
+                    <text x="770" y="410" text-anchor="middle" class="field-label">Backward Point</text>
                     
-                    <circle cx="720" cy="450" r="4" fill="#FFA500"/>
-                    <text x="720" y="440" text-anchor="middle" class="field-label">C</text>
+                    <circle cx="730" cy="380" r="4" fill="#FFA500"/>
+                    <text x="730" y="370" text-anchor="middle" class="field-label">Cover Point</text>
                     
-                    <!-- Extra Cover -->
+                    <circle cx="700" cy="360" r="4" fill="#FFA500"/>
+                    <text x="700" y="350" text-anchor="middle" class="field-label">Cover</text>
+                    
                     <circle cx="680" cy="380" r="4" fill="#FFA500"/>
-                    <text x="680" y="370" text-anchor="middle" class="field-label">E</text>
+                    <text x="680" y="370" text-anchor="middle" class="field-label">Extra Cover</text>
                     
-                    <!-- Mid Off -->
-                    <circle cx="650" cy="400" r="4" fill="#FFA500"/>
-                    <text x="650" y="390" text-anchor="middle" class="field-label">MO</text>
+                    <circle cx="650" cy="420" r="4" fill="#FFA500"/>
+                    <text x="650" y="410" text-anchor="middle" class="field-label">Short Mid-off</text>
                     
-                    <!-- Third Man (deep on off side) -->
-                    <circle cx="850" cy="300" r="4" fill="#0000FF"/>
-                    <text x="850" y="290" text-anchor="middle" class="field-label">TM</text>
+                    <circle cx="640" cy="440" r="4" fill="#FFA500"/>
+                    <text x="640" y="430" text-anchor="middle" class="field-label">Mid-off</text>
                     
-                    <circle cx="900" cy="350" r="4" fill="#0000FF"/>
-                    <text x="900" y="340" text-anchor="middle" class="field-label">TM</text>
+                    <!-- Deep/Boundary Off Side -->
+                    <circle cx="900" cy="300" r="4" fill="#0000FF"/>
+                    <text x="900" y="290" text-anchor="middle" class="field-label">Sweeper</text>
                     
-                    <!-- Deep Cover -->
-                    <circle cx="850" cy="400" r="4" fill="#0000FF"/>
-                    <text x="850" y="390" text-anchor="middle" class="field-label">DC</text>
+                    <circle cx="850" cy="350" r="4" fill="#0000FF"/>
+                    <text x="850" y="340" text-anchor="middle" class="field-label">Deep Cover</text>
                     
-                    <!-- Long Off -->
-                    <circle cx="750" cy="300" r="4" fill="#0000FF"/>
-                    <text x="750" y="290" text-anchor="middle" class="field-label">LO</text>
+                    <circle cx="820" cy="380" r="4" fill="#0000FF"/>
+                    <text x="820" y="370" text-anchor="middle" class="field-label">Deep Extra Cover</text>
                     
-                    <!-- LEG SIDE (Left side from batsman's perspective) -->
-                    <!-- Mid On -->
-                    <circle cx="550" cy="400" r="4" fill="#FFA500"/>
-                    <text x="550" y="390" text-anchor="middle" class="field-label">MI</text>
+                    <circle cx="750" cy="450" r="4" fill="#0000FF"/>
+                    <text x="750" y="440" text-anchor="middle" class="field-label">Long Off</text>
                     
-                    <!-- Mid Wicket -->
-                    <circle cx="520" cy="380" r="4" fill="#FFA500"/>
-                    <text x="520" y="370" text-anchor="middle" class="field-label">MW</text>
+                    <!-- LEG SIDE (Left side from striker's perspective) -->
+                    <!-- Behind the Wicket Leg Side -->
+                    <circle cx="580" cy="270" r="4" fill="#FF0000"/>
+                    <text x="580" y="260" text-anchor="middle" class="field-label">Leg Slip</text>
                     
-                    <circle cx="520" cy="420" r="4" fill="#FFA500"/>
-                    <text x="520" y="410" text-anchor="middle" class="field-label">MW</text>
+                    <!-- Close-in/Inner Ring Leg Side -->
+                    <circle cx="580" cy="320" r="4" fill="#FFA500"/>
+                    <text x="580" y="310" text-anchor="middle" class="field-label">Short Leg</text>
                     
-                    <!-- Square Leg -->
+                    <circle cx="570" cy="340" r="4" fill="#FFA500"/>
+                    <text x="570" y="330" text-anchor="middle" class="field-label">Silly Mid-on</text>
+                    
+                    <circle cx="560" cy="440" r="4" fill="#FFA500"/>
+                    <text x="560" y="430" text-anchor="middle" class="field-label">Mid-on</text>
+                    
+                    <circle cx="530" cy="420" r="4" fill="#FFA500"/>
+                    <text x="530" y="410" text-anchor="middle" class="field-label">Midwicket</text>
+                    
                     <circle cx="450" cy="400" r="4" fill="#FFA500"/>
-                    <text x="450" y="390" text-anchor="middle" class="field-label">SL</text>
+                    <text x="450" y="390" text-anchor="middle" class="field-label">Square Leg</text>
                     
-                    <!-- Fine Leg -->
-                    <circle cx="350" cy="450" r="4" fill="#800080"/>
-                    <text x="350" y="440" text-anchor="middle" class="field-label">FL</text>
+                    <circle cx="480" cy="430" r="4" fill="#FFA500"/>
+                    <text x="480" y="420" text-anchor="middle" class="field-label">Short Backward Square Leg</text>
                     
-                    <!-- Deep Square Leg -->
+                    <circle cx="420" cy="450" r="4" fill="#FFA500"/>
+                    <text x="420" y="440" text-anchor="middle" class="field-label">Short Fine Leg</text>
+                    
+                    <!-- Deep/Boundary Leg Side -->
+                    <circle cx="350" cy="380" r="4" fill="#0000FF"/>
+                    <text x="350" y="370" text-anchor="middle" class="field-label">Deep Midwicket</text>
+                    
                     <circle cx="300" cy="400" r="4" fill="#0000FF"/>
-                    <text x="300" y="390" text-anchor="middle" class="field-label">DSL</text>
+                    <text x="300" y="390" text-anchor="middle" class="field-label">Deep Square Leg</text>
                     
-                    <!-- Deep Mid Wicket -->
+                    <circle cx="250" cy="430" r="4" fill="#0000FF"/>
+                    <text x="250" y="420" text-anchor="middle" class="field-label">Deep Backward Square Leg</text>
+                    
                     <circle cx="400" cy="350" r="4" fill="#0000FF"/>
-                    <text x="400" y="340" text-anchor="middle" class="field-label">DMW</text>
+                    <text x="400" y="340" text-anchor="middle" class="field-label">Cow Corner</text>
                     
-                    <circle cx="400" cy="450" r="4" fill="#0000FF"/>
-                    <text x="400" y="440" text-anchor="middle" class="field-label">DMW</text>
+                    <circle cx="450" cy="320" r="4" fill="#0000FF"/>
+                    <text x="450" y="310" text-anchor="middle" class="field-label">Long On</text>
                     
-                    <!-- Long On -->
-                    <circle cx="450" cy="300" r="4" fill="#0000FF"/>
-                    <text x="450" y="290" text-anchor="middle" class="field-label">LI</text>
+                    <circle cx="200" cy="450" r="4" fill="#0000FF"/>
+                    <text x="200" y="440" text-anchor="middle" class="field-label">Long Leg</text>
                     
-                    <!-- Long Leg -->
-                    <circle cx="250" cy="450" r="4" fill="#0000FF"/>
-                    <text x="250" y="440" text-anchor="middle" class="field-label">LL</text>
+                    <circle cx="350" cy="500" r="4" fill="#800080"/>
+                    <text x="350" y="490" text-anchor="middle" class="field-label">Fine Leg</text>
                     
                     <!-- Position legend -->
                     <g transform="translate(50, 50)">
@@ -166,32 +204,38 @@
                         <circle cx="15" cy="95" r="3" fill="#800080"/>
                         <text x="25" y="100" class="legend-text">Fine positions</text>
                         <circle cx="15" cy="115" r="3" fill="#00FF00"/>
-                        <text x="25" y="120" class="legend-text">Wicket Keeper/Bowler</text>
+                        <text x="25" y="120" class="legend-text">Players</text>
                     </g>
                     
                     <!-- Position abbreviations legend -->
                     <g transform="translate(50, 220)">
-                        <rect x="0" y="0" width="200" height="320" fill="rgba(255,255,255,0.95)" stroke="#000" stroke-width="1" rx="5"/>
-                        <text x="10" y="20" class="legend-title">Position Abbreviations</text>
-                        <text x="10" y="40" class="legend-text">1S,2S,3S - 1st,2nd,3rd Slip</text>
-                        <text x="10" y="55" class="legend-text">G - Gully</text>
-                        <text x="10" y="70" class="legend-text">P - Point</text>
-                        <text x="10" y="85" class="legend-text">C - Cover</text>
-                        <text x="10" y="100" class="legend-text">E - Extra Cover</text>
-                        <text x="10" y="115" class="legend-text">MO - Mid Off</text>
-                        <text x="10" y="130" class="legend-text">TM - Third Man</text>
-                        <text x="10" y="145" class="legend-text">DC - Deep Cover</text>
-                        <text x="10" y="160" class="legend-text">LO - Long Off</text>
-                        <text x="10" y="175" class="legend-text">MI - Mid On</text>
-                        <text x="10" y="190" class="legend-text">MW - Mid Wicket</text>
-                        <text x="10" y="205" class="legend-text">SL - Square Leg</text>
-                        <text x="10" y="220" class="legend-text">FL - Fine Leg</text>
-                        <text x="10" y="235" class="legend-text">DSL - Deep Square Leg</text>
-                        <text x="10" y="250" class="legend-text">DMW - Deep Mid Wicket</text>
-                        <text x="10" y="265" class="legend-text">LI - Long On</text>
-                        <text x="10" y="280" class="legend-text">LL - Long Leg</text>
-                        <text x="10" y="295" class="legend-text">W - Wicket Keeper</text>
-                        <text x="10" y="310" class="legend-text">B - Bowler</text>
+                        <rect x="0" y="0" width="220" height="400" fill="rgba(255,255,255,0.95)" stroke="#000" stroke-width="1" rx="5"/>
+                        <text x="10" y="20" class="legend-title">Field Positions</text>
+                        <text x="10" y="40" class="legend-text">Slips: 1st, 2nd, 3rd, 4th</text>
+                        <text x="10" y="55" class="legend-text">Gully, Fly Slip</text>
+                        <text x="10" y="70" class="legend-text">Leg Slip</text>
+                        <text x="10" y="85" class="legend-text">Silly Point, Silly Mid-off</text>
+                        <text x="10" y="100" class="legend-text">Short Leg, Silly Mid-on</text>
+                        <text x="10" y="115" class="legend-text">Point, Backward Point</text>
+                        <text x="10" y="130" class="legend-text">Cover Point, Cover</text>
+                        <text x="10" y="145" class="legend-text">Extra Cover</text>
+                        <text x="10" y="160" class="legend-text">Short Mid-off, Mid-off</text>
+                        <text x="10" y="175" class="legend-text">Mid-on, Midwicket</text>
+                        <text x="10" y="190" class="legend-text">Square Leg</text>
+                        <text x="10" y="205" class="legend-text">Short Backward Square Leg</text>
+                        <text x="10" y="220" class="legend-text">Short Fine Leg</text>
+                        <text x="10" y="235" class="legend-text">Third Man, Long Stop</text>
+                        <text x="10" y="250" class="legend-text">Sweeper</text>
+                        <text x="10" y="265" class="legend-text">Deep Cover</text>
+                        <text x="10" y="280" class="legend-text">Deep Extra Cover</text>
+                        <text x="10" y="295" class="legend-text">Long Off</text>
+                        <text x="10" y="310" class="legend-text">Deep Midwicket</text>
+                        <text x="10" y="325" class="legend-text">Deep Square Leg</text>
+                        <text x="10" y="340" class="legend-text">Deep Backward Square Leg</text>
+                        <text x="10" y="355" class="legend-text">Cow Corner</text>
+                        <text x="10" y="370" class="legend-text">Long On</text>
+                        <text x="10" y="385" class="legend-text">Long Leg</text>
+                        <text x="10" y="400" class="legend-text">Fine Leg</text>
                     </g>
                 </svg>
             </div>

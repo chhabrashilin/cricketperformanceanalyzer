@@ -4,6 +4,7 @@ class CricketAnalyzer {
     constructor() {
         this.dismissals = [];
         this.currentDot = null;
+        this.lastClickTime = 0;
         this.init();
     }
 
@@ -19,8 +20,8 @@ class CricketAnalyzer {
         const modal = document.getElementById('detailModal');
         const closeBtn = document.querySelector('.close');
 
-        // Field click to place dot
-        field.addEventListener('click', (e) => this.handleFieldClick(e));
+        // Field click to place dot - use mousedown instead of click for more control
+        field.addEventListener('mousedown', (e) => this.handleFieldClick(e));
 
         // Form submission
         form.addEventListener('submit', (e) => this.handleFormSubmit(e));
@@ -41,29 +42,79 @@ class CricketAnalyzer {
     }
 
     handleFieldClick(e) {
-        // Don't place dot if clicking on existing dots or labels
-        if (e.target.classList.contains('dismissal-dot') || 
-            e.target.classList.contains('field-label') ||
-            e.target.tagName === 'text') {
+        // Prevent default behavior and stop propagation
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+
+        // Prevent multiple rapid clicks with a more robust system
+        const now = Date.now();
+        if (this.lastClickTime && (now - this.lastClickTime) < 500) {
+            console.log('Click blocked - too rapid');
             return;
         }
+        this.lastClickTime = now;
 
-        const rect = e.currentTarget.getBoundingClientRect();
+        // Get the SVG element
+        const svg = document.getElementById('cricketField');
+        const rect = svg.getBoundingClientRect();
+        
+        // Calculate relative position within the SVG
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
-        // Convert to SVG coordinates
-        const svgPoint = this.getSVGPoint(e.currentTarget, x, y);
+        // Convert to SVG coordinate system
+        const svgPoint = this.getSVGPoint(svg, x, y);
+
+        // Check if click is within the circular field (center: 600,400, radius: 380)
+        const distanceFromCenter = Math.sqrt(
+            Math.pow(svgPoint.x - 600, 2) + Math.pow(svgPoint.y - 400, 2)
+        );
+        
+        if (distanceFromCenter > 370) {
+            console.log('Click outside field boundary, ignoring');
+            return;
+        }
+
+        console.log('=== NEW CLICK ===');
+        console.log('Mouse position:', e.clientX, e.clientY);
+        console.log('SVG rect:', rect.left, rect.top, rect.width, rect.height);
+        console.log('Relative to SVG:', x, y);
+        console.log('SVG coords:', svgPoint.x, svgPoint.y);
+        console.log('Distance from center:', distanceFromCenter);
 
         // Create temporary dot
         this.createTempDot(svgPoint.x, svgPoint.y);
     }
 
     getSVGPoint(svg, clientX, clientY) {
+        // Use SVG's built-in coordinate transformation
         const pt = svg.createSVGPoint();
         pt.x = clientX;
         pt.y = clientY;
-        return pt.matrixTransform(svg.getScreenCTM().inverse());
+        
+        // Transform using the SVG's current transformation matrix
+        const ctm = svg.getScreenCTM();
+        if (ctm) {
+            const transformedPoint = pt.matrixTransform(ctm.inverse());
+            console.log('SVG transformed coords:', transformedPoint.x, transformedPoint.y);
+            return {
+                x: Math.round(transformedPoint.x),
+                y: Math.round(transformedPoint.y)
+            };
+        }
+        
+        // Fallback: manual calculation
+        const rect = svg.getBoundingClientRect();
+        const viewBox = svg.viewBox.baseVal;
+        const svgX = Math.round((clientX / rect.width) * viewBox.width);
+        const svgY = Math.round((clientY / rect.height) * viewBox.height);
+        
+        console.log('Fallback calculation:', svgX, svgY);
+        return {
+            x: svgX,
+            y: svgY
+        };
     }
 
     createTempDot(x, y) {
@@ -73,16 +124,25 @@ class CricketAnalyzer {
             existingTemp.remove();
         }
 
+        // Validate coordinates are within reasonable bounds
+        if (x < 50 || x > 1150 || y < 50 || y > 750) {
+            console.log('Click outside field bounds, ignoring. Coords:', x, y);
+            return;
+        }
+
+        console.log('Creating dot at:', x, y);
+
         // Create new temporary dot
         const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         dot.setAttribute('cx', x);
         dot.setAttribute('cy', y);
-        dot.setAttribute('r', 6);
+        dot.setAttribute('r', 8);
         dot.setAttribute('fill', '#ff4444');
         dot.setAttribute('stroke', '#ffffff');
-        dot.setAttribute('stroke-width', 2);
+        dot.setAttribute('stroke-width', 3);
         dot.classList.add('temp-dot');
-        dot.style.opacity = '0.7';
+        dot.style.opacity = '0.9';
+        dot.style.cursor = 'pointer';
 
         // Add pulsing animation
         dot.style.animation = 'pulse 1.5s infinite';
